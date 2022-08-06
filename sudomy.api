@@ -1,0 +1,48 @@
+# URL :  http://developer.shodan.io
+# Example :
+#      - SHODAN_API="VGhpc1M0bXBsZWwKVGhmcGxlbAo"
+
+SHODAN_API="cHtPgO5lCBWXrNJoDWSQ2EDT8BxedQIw"
+
+# Censys
+# URL : https://search.censys.io/register
+
+CENSYS_API="d973cf60-4ce4-4746-962b-815ddfdebf80"
+CENSYS_SECRET="s6EUuA4Sfaajd8jDBJ17b4DaoPofjDe6"
+
+# Virustotal
+# URL : https://www.virustotal.com/gui/
+VIRUSTOTAL="f746c737123dae2844c6b75d4fe85cadadc2d8b36208fdbd6b2b2905be296432"
+
+# Binaryedge
+# URL : https://app.binaryedge.io/login
+BINARYEDGE="4b2f0bd2-e613-49b2-a2dd-1a6d52eb055f"
+
+
+# SecurityTrails
+# URL : https://securitytrails.com/
+SECURITY_TRAILS="QtXHR0LcWlu1KIHuaNRmYmwOAdPrw63y"
+
+
+# DNSDB
+# URL: https://api.dnsdb.info/l
+DNSDB_API=""
+
+
+# PassiveTotal
+# URL : https://community.riskiq.com/
+#    - Go to account settings
+# Example : PASSIVE_API="admin@sudomy.id:1c235d10cbc66b28d59e796a13"
+
+PASSIVE_API="feyor98679@upsdom.com:20fab4181adbea8973c7f032bee947bfd7f3f61a47ef3474f3d7bb620dbf5ebf" 
+
+
+# Spyse
+# URL : https://spyse.com
+
+SPYSE_API="60dc5a0f-2fab-4089-91dd-1deab783a467"
+
+# Facebook Certificates
+# URL : https://graph.facebook.com/certificates
+
+FACEBOOK_TOKEN=""
