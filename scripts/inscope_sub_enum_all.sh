@@ -29,6 +29,9 @@ sub_enum(){
 mkdir $2knockpy_report/
 sudo chmod 777 $2*
 
+amass enum -passive -d $1 -o $2amass_passive
+amass enum -active -d $1 -o $2amass_active
+amass enum -d $1 -o $2amass_normal
 afinder $1 $2assetfinder
 findomain $1 $2findomain
 subfindero $1 $2subfinder
