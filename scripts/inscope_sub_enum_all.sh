@@ -77,5 +77,7 @@ count=0;
 while read sub; do
 ((count+=1));
 echo $count
-sub_enum $sub ~/ovo/ x$count
+sub_enum $sub $2 $sub
 done < $1
+
+# bash ~/scripts/inscope_sub_enum_all.sh ~/dutch/inscope ~/dutch/
