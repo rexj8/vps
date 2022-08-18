@@ -68,7 +68,7 @@ sub_enum(){
 # sub_enum flaws.cloud ~/flaws.cloud/ x
 apikey
 mkdir $2knockpy_report/
-echo root | sudo -S chmod 777 $2*
+sudo chmod 777 $2*
 
 amass enum -passive -d $1 -o $2amass_passive
 amass enum -active -d $1 -o $2amass_active
