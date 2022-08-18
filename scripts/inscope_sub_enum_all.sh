@@ -80,4 +80,14 @@ echo $count
 sub_enum $sub $2 $sub
 done < $1
 
+
+while read sub; do
+cat $sub | anew $2x
+done < $1
+
+
+live $2x
+
+
+
 # bash ~/scripts/inscope_sub_enum_all.sh ~/dutch/inscope ~/dutch/
