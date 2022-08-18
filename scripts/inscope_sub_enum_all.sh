@@ -27,7 +27,7 @@ python3 ~/tools_pentesting/subenum_tools/sublist3r/sublist3r.py -d $1 -o $2 -t 5
 
 sub_enum(){
 mkdir $2knockpy_report/
-echo root | sudo -S chmod 777 $2*
+sudo chmod 777 $2*
 
 amass enum -passive -d $1 -o $2amass_passive
 amass enum -active -d $1 -o $2amass_active
