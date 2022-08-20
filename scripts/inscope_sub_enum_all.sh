@@ -82,7 +82,7 @@ done < $1
 
 
 while read sub; do
-cat $sub | anew $2x
+cat $2$sub | anew $2x
 done < $1
 
 
