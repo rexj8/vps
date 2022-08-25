@@ -26,6 +26,7 @@ python3 ~/tools_pentesting/subenum_tools/sublist3r/sublist3r.py -d $1 -o $2 -t 5
 }
 
 sub_enum(){
+cd ~/tools_pentesting/Sudomy/
 mkdir $2knockpy_report/
 sudo chmod 777 $2*
 
