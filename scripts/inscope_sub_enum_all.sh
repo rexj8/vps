@@ -57,7 +57,7 @@ cat $2knockpy | anew $2$3
 
 echo "$(tput setaf 166)------------------------------------------------------------anew Sudomy------------------------------------------------------------"
 domain=$(ls $2Sudomy-Output/)
-cat $2Sudomy-Output/$domain/subdomain.txt | anew $2$3
+cat $2Sudomy-Output/$domain/subdomain.txt | awk '{print $1}' | grep $domain | anew $2$3
 
 rm $2assetfinder $2findomain $2subfinder $2sublister $2amass_normal $2amass_active $2amass_passive $2knockpy
 rm -rf $2Sudomy-Output
