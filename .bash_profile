@@ -1,6 +1,12 @@
 export PS1="\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 4)\]\w $ \[$(tput setaf 3)\]"
 
 #---------------------------------------------RECON--------------------------------------------------
+# sed 's/^........//' live
+
+subnetresolve(){
+# subnetresolve 220.244.114.32/27
+nmap -sL -n $1 | grep 'Nmap scan report for' | cut -f 5 -d ' '
+}
 
 scp_vps(){
     scp kali:~/$1_normal $2amass_normal
@@ -66,6 +72,7 @@ rm -rf $2test_knockipo
 
 sub_enum(){
 # sub_enum flaws.cloud ~/flaws.cloud/ x
+cd ~/tools_pentesting/Sudomy/
 apikey
 mkdir $2knockpy_report/
 sudo chmod 777 $2*
@@ -157,7 +164,7 @@ curl -s https://crt.sh/\?Identity\=$1.%\&output\=json | jq -r '.[].name_value' |
 }
 
 crtsho(){
-curl -s https://crt.sh/\?O\=$1\&output\=json | jq -r '.[].common_name' | sed 's/\*\.//g' | sort -u 
+curl -s https://crt.sh/\?O\=$1\&output\=json | jq -r '.[].common_name' | sed 's/\*\.//g' | sort -u
 }
 
 cloudunflair(){
@@ -189,7 +196,7 @@ nmap -p25 --script smtp-enum-users --script-args smtp-enum-users.methods={$2} $1
 }
 
 smtp_nmap(){
-nmap -p25 --script smtp-commands $1 
+nmap -p25 --script smtp-commands $1
 echo "-----------------------------------------------------------------------------------------------------------"
 nmap -p25 --script smtp-open-relay $1
 echo "-----------------------------------------------------------------------------------------------------------"
@@ -220,14 +227,18 @@ export WPSCAN_API_TOKEN=T28YofMUvHAa2m7ZUJO1TKK7yTSlCoYaBiw8JilRKyw
 }
 
 h(){
-httprobe
+httprobe -p 4443,2075,2076,6443,3868,3366,8443,8080,9443,9091,3000,8000,5900,8081,6000,10000,8181,3306,5000,4000,8888,5432,15672,9999,161,4044,7077,4040,9000,8089,443,744
+}
+
+hx(){
+httpx -ports 4443,2075,2076,6443,3868,3366,8443,8080,9443,9091,3000,8000,5900,8081,6000,10000,8181,3306,5000,4000,8888,5432,15672,9999,161,4044,7077,4040,9000,8089,443,744
 }
 
 live(){
 # live x [_29july]
 echo "$(tput setaf 166)  Analyzing Live URLS... $(tput setaf 15)"
-cat $1 | httprobe | grep https | tee -a httprobe
-cat $1 | httpx | grep https | tee -a httpx
+cat $1 | httprobe -p 4443,2075,2076,6443,3868,3366,8443,8080,9443,9091,3000,8000,5900,8081,6000,10000,8181,3306,5000,4000,8888,5432,15672,9999,161,4044,7077,4040,9000,8089,443,744 | grep https | tee -a httprobe
+cat $1 | httpx -ports 4443,2075,2076,6443,3868,3366,8443,8080,9443,9091,3000,8000,5900,8081,6000,10000,8181,3306,5000,4000,8888,5432,15672,9999,161,4044,7077,4040,9000,8089,443,744 | grep https | tee -a httpx
 cat httprobe | anew live$2
 cat httpx | anew live$2
 rm -rf httprobe httpx
