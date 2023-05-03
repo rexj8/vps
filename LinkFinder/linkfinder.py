@@ -277,7 +277,7 @@ def check_url(url):
             url = "https:" + url
         if url[:4] != "http":
             from urllib.parse import urlparse
-            domain = urlparse(args.input).netloc
+            domain = urlparse(args.input.replace('view-source:','')).netloc
             # print(domain) # --> www.example.test
 
             if url[:1] == "/":
