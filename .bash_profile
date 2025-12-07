@@ -43,11 +43,63 @@ shodanipo(){
 shodan search --limit 1000 --fields ip_str,port ssl:$1 200 OK | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | sed 's/^/http:\/\//' | tee $2ip_for_ssl_check
 }
 
-c99ipo(){
+# c99ipo(){
 # get link from subdomainfinder.c99.nl
 # like: https://subdomainfinder.c99.nl/scans/2022-02-27/gymshark.com
 # curl https://subdomainfinder.c99.nl/scans/2022-02-27/gymshark.com | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | sort -u | tee -a ~/gymshark/com.gymshark/ip_c99
-curl $1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | sort -u | tee -a $2ip_c99
+#curl $1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | sort -u | tee -a $2ip_c99
+#}
+
+c99o(){
+# Get previous month in 2-digit format
+month=$(date -d "$(date +%Y-%m-15) -1 month" +%m)
+year=$(date +%Y)
+day=1
+
+while [ $day -le 31 ]; do
+    url="https://subdomainfinder.c99.nl/scans/$year-$month-$day/$1"
+    # echo "Checking $url"
+
+    # Fetch and extract subdomains
+    results=$(curl -s "$url" | grep -oE "([a-zA-Z0-9-]+\.)+$1" | sort -u)
+
+    if [ -n "$results" ]; then
+        # echo "Results found on $day/$month/$year:"
+        echo "$results"
+        break
+    fi
+
+    day=$((day + 1))
+done
+}
+
+c99ipo() {
+    month=$(date -d "$(date +%Y-%m-15) -1 month" +%m)
+    year=$(date +%Y)
+    day=1
+    domain=$1
+    all_ips=""
+
+    while [ $day -le 31 ]; do
+        url="https://subdomainfinder.c99.nl/scans/$year-$month-$day/$domain"
+        # echo "Checking $url"
+
+        # Extract IPs from the page content
+        results=$(curl -s "$url" | grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b')
+
+        if [ -n "$results" ]; then
+            # echo "IP addresses found on $day/$month/$year"
+            all_ips+="$results"$'\n'
+        fi
+
+        day=$((day + 1))
+    done
+
+    # echo
+    # echo "==========================="
+    # echo "✅ Unique IPs for $domain:"
+    # echo "==========================="
+    echo "$all_ips" | sort -u
 }
 
 knockscriptipo(){
